@@ -39,7 +39,7 @@ class VerifyEmailForm extends Model
     }
 
     /**
-     * Verify email
+     * Verify email 
      *
      * @return User|null the saved model or null if saving fails
      */

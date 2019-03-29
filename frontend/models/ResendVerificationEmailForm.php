@@ -49,12 +49,12 @@ class ResendVerificationEmailForm extends Model
         }
 
         return Yii::$app
-            ->mailer
+            ->mail
             ->compose(
                 ['html' => 'emailVerify-html', 'text' => 'emailVerify-text'],
                 ['user' => $user]
             )
-            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
+            ->setFrom('donotreply@aztechtcs.com')
             ->setTo($this->email)
             ->setSubject('Account registration at ' . Yii::$app->name)
             ->send();
