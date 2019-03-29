@@ -26,7 +26,7 @@ if($model->isNewRecord == false){
 
     echo $form->field($model, 'email')->textInput(['maxlength' => true]);
 
-    echo $form->field($model, 'whatsapp')->textInput(['maxlength' => true,]);
+    echo $form->field($model, 'whatsapp')->textInput(['maxlength' => true,])->label('Whatsapp Number');
 }
 
     
