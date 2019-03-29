@@ -44,7 +44,7 @@ echo DateTimePicker::widget([
     'pluginOptions' => [
         //'format' => 'd-M-Y g:i A',
         'format' => 'Y-m-d g:i',
-        //'startDate' => '15-Mar-2019 12:00 AM',
+        'startDate' => '15-Mar-2019 12:00 AM',
         'todayHighlight' => true
     ]
 ]);
