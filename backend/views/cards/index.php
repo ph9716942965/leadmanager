@@ -27,11 +27,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+           // 'id',
             'name',
-            'title',
-            'contact_number',
-            'email:email',
+           // 'title',
+           // 'contact_number',
+           // 'email:email',
             //'whatsapp',
             //'gmap',
             //'payme',
@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'website_url:url',
             //'image_url:url',
 
-            ['class' => 'yii\grid\ActionColumn'],
+          //  ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 
