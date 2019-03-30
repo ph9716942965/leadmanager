@@ -40,7 +40,7 @@ class CardsSearch extends Cards
      */
     public function search($params)
     {
-        $query = Cards::find();
+        $query = Cards::find()->orderBy('status');
 
         // add conditions that should always apply here
 

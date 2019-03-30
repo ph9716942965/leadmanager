@@ -34,13 +34,14 @@ class CardsController extends Controller
      * @return mixed
      */
 
-    public function actionMail(){
+   /* public function actionMail(){
         Yii::$app->mail->compose()
      ->setFrom('donotreply@aztechtcs.com')
      ->setTo('ph9716942965@gmail.com')
      ->setSubject('Email sent from Yii2-Swiftmailer')
      ->send();
-    }
+    }*/ 
+
     public function actionIndex()
     {
         $searchModel = new CardsSearch();
