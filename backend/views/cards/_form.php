@@ -25,7 +25,11 @@ use dosamigos\ckeditor\CKEditor;
 
     <?= $form->field($model, 'gmap')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'payme')->textInput(['maxlength' => true]) ?>
+    <?php // $form->field($model, 'payme')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'payme')->widget(CKEditor::className(), [
+		'options' => ['rows' => 2],
+		'preset' => 'basic'
+	]) ?>
 
     <?= $form->field($model, 'about')->widget(CKEditor::className(), [
 		'options' => ['rows' => 2],
