@@ -9,7 +9,9 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
-
+// if (class_exists('ramosisw\CImaterial\web\MaterialAsset')) {
+//     ramosisw\CImaterial\web\MaterialAsset::register($this);
+// }
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -19,7 +21,7 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?php $this->registerCsrfMetaTags() ?>
+    <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>

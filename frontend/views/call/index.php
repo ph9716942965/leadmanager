@@ -4,18 +4,18 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\CardsSearch */
+/* @var $searchModel frontend\models\CallSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Cards';
+$this->title = Yii::t('app', 'Calls');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="cards-index">
+<div class="call-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Cards', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Call'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -27,23 +27,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-           // 'id',
+            'id',
             'name',
-           // 'title',
-           // 'contact_number',
-           // 'email:email',
-            //'whatsapp',
-            //'gmap',
-            //'payme',
-            //'about',
-            //'skill',
-            //'education',
-            //'awards',
-            //'testimonials',
-            //'compny_name',
-            //'service',
-            //'website_url:url',
-            //'image_url:url',
+            'email:email',
+            'whatsapp',
+            'phone',
+            //'address',
+            //'create_at',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
