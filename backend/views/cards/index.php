@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'website_url:url',
             //'image_url:url',
 
-          //  ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 
