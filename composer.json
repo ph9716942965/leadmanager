@@ -22,6 +22,7 @@
         "2amigos/yii2-ckeditor-widget": "*",
         "johnitvn/yii2-ajaxcrud": "*"
         
+        
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
