@@ -12,11 +12,19 @@ use yii\widgets\DetailView;
         'attributes' => [
             'id',
             'name',
-            'email:email',
-            'whatsapp',
-            'phone',
-            'address',
-            [ 'format' => 'html', 'label' => 'Next Appointment','value'=>function ($data){
+            'email:email', //<b class="glyphicon glyphicon-envelope"></b> 
+            //'whatsapp',
+            [ 'format' => 'html', 'label' => '<b class="fa fa-whatsapp"></b> Whatsapp','value'=>function ($data){
+               $return ='';
+               $return .="<a href='https://wa.me/$data->whatsapp'><i class='fa fa-whatsapp'></i><i>$data->whatsapp</i>";
+                return  $return;
+            }
+            ],
+
+            'phone', //<b class="fa-phone-square"></b> 
+            'address', //<b class="fa fa-home"></b> 
+
+            [ 'format' => 'html', 'label' => '<b class="fa fa-calendar-times-o"></b> Next Appointment','value'=>function ($data){
                 $nextCall=$callTrack=\backend\models\Appointment::find()
                 ->where(['db_id' => $data->id])
                 ->select(['appointment_date_time','create_at'])
