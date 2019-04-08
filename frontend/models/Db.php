@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\models;
+namespace app\models;
 
 use Yii;
 
@@ -35,7 +35,7 @@ class Db extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'email', 'whatsapp', 'phone', 'address'], 'required'],
-            [['create_at','call_status'], 'safe'],
+            [['create_at'], 'safe'],
             [['name'], 'string', 'max' => 50],
             [['email'], 'string', 'max' => 100],
             [['whatsapp', 'phone'], 'string', 'max' => 15],

@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\models;
+namespace app\models;
 
 use Yii;
 
@@ -18,7 +18,7 @@ use Yii;
  * @property Appointment[] $appointments
  * @property CallLog[] $callLogs
  */
-class Db extends \yii\db\ActiveRecord
+class Call extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -35,7 +35,7 @@ class Db extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'email', 'whatsapp', 'phone', 'address'], 'required'],
-            [['create_at','call_status'], 'safe'],
+            [['create_at'], 'safe'],
             [['name'], 'string', 'max' => 50],
             [['email'], 'string', 'max' => 100],
             [['whatsapp', 'phone'], 'string', 'max' => 15],
@@ -49,13 +49,13 @@ class Db extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
-            'email' => 'Email',
-            'whatsapp' => 'Whatsapp',
-            'phone' => 'Phone',
-            'address' => 'Address',
-            'create_at' => 'Create At',
+            'id' => Yii::t('app', 'ID'),
+            'name' => Yii::t('app', 'Name'),
+            'email' => Yii::t('app', 'Email'),
+            'whatsapp' => Yii::t('app', 'Whatsapp'),
+            'phone' => Yii::t('app', 'Phone'),
+            'address' => Yii::t('app', 'Address'),
+            'create_at' => Yii::t('app', 'Create At'),
         ];
     }
 
@@ -73,5 +73,14 @@ class Db extends \yii\db\ActiveRecord
     public function getCallLogs()
     {
         return $this->hasMany(CallLog::className(), ['db_id' => 'id']);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @return DbQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new DbQuery(get_called_class());
     }
 }

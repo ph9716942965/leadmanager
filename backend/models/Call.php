@@ -18,11 +18,14 @@ use Yii;
  * @property Appointment[] $appointments
  * @property CallLog[] $callLogs
  */
-class Db extends \yii\db\ActiveRecord
+class Call extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
+    public $call_status;
+    public $remark;
+    public $callback;
     public static function tableName()
     {
         return 'db';
@@ -34,8 +37,8 @@ class Db extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'email', 'whatsapp', 'phone', 'address'], 'required'],
-            [['create_at','call_status'], 'safe'],
+            [['name', 'email', 'whatsapp', 'phone', 'address','remark','call_status'], 'required'],
+            [['create_at','call_status','callback'], 'safe'],
             [['name'], 'string', 'max' => 50],
             [['email'], 'string', 'max' => 100],
             [['whatsapp', 'phone'], 'string', 'max' => 15],
@@ -49,13 +52,14 @@ class Db extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
-            'email' => 'Email',
-            'whatsapp' => 'Whatsapp',
-            'phone' => 'Phone',
-            'address' => 'Address',
-            'create_at' => 'Create At',
+            'id' => Yii::t('app', 'ID'),
+            'name' => Yii::t('app', 'Name'),
+            'email' => Yii::t('app', 'Email'),
+            'whatsapp' => Yii::t('app', 'Whatsapp'),
+            'phone' => Yii::t('app', 'Phone'),
+            'address' => Yii::t('app', 'Address'),
+            'create_at' => Yii::t('app', 'Create At'),
+            'call_status'=>Yii::t('app', 'Call Status'),
         ];
     }
 
