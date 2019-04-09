@@ -29,15 +29,13 @@ class CallController extends Controller
         ];
     }
 
-    public function actionCalling($id=null)
-{
-    if($id==null){
-
+    private function GetCallingId(){
         $id=\backend\models\Call::find()->select('id')
         ->where('status >0')
-        ->orderBy('status ASC')
-        ->addOrderBy('last_call ASC')
+        ->OrderBy('last_call')
         ->addOrderBy('update_at ASC')
+        ->addOrderBy('create_at ASC')
+        ->addOrderBy('status ASC')
         //->createCommand()->sql;
         ->asArray()->one()['id'];
 
@@ -45,16 +43,29 @@ class CallController extends Controller
         $command = $connection->createCommand('UPDATE `db` SET `last_call`=CURRENT_TIMESTAMP where id='.$id);
         $res=$command->execute();
         //$res=$command->queryAll();
-       // echo $id;exit;
-       // $call_picup=\backend\models\Call::
-//SELECT `id` FROM `db` WHERE status >0 ORDER BY `status`, `last_call`, `update_at`
-        //UPDATE `db` SET `last_call`=CURRENT_TIMESTAMP where id=1
-       // $id = 1; //2019-04-09 03:31:08
+        return $id;
     }
+
+    public function actionCalling_old($id=null)
+{
+    if($id==null){
+        $id=$this->GetCallingId();
+        return $this->redirect('index.php?r=call/calling&id='.$id);
+    }
+
     $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-           // return $this->redirect(['view', 'id' => $model->id]);
+            \Yii::$app->session->setFlash('success', 'Call Completed'.$model->phone);
+            //return $this->redirect('index.php?r=call/calling');
+           
+            unset($id);
+            $id=$this->GetCallingId();
+            unset($model);
+            $model = $this->findModel($id);
+            return $this->render('update', [
+                'model' => $model,
+            ]);
         }
    // $model = new \backend\models\Call(['scenario' => 'calling']);
 
@@ -68,6 +79,73 @@ class CallController extends Controller
     return $this->render('update', [
         'model' => $model,
     ]);
+}
+
+
+
+public function actionCalling($id=null)
+{
+    if($id==null){
+        $id=$this->GetCallingId();
+        return $this->redirect('index.php?r=call/calling&id='.$id);
+    }
+    $request = Yii::$app->request;
+    $model = $this->findModel($id);       
+
+    if($request->isAjax){
+        /*
+        *   Process for ajax request
+        */
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if($request->isGet){
+            return [
+                'title'=> "Update Db #".$id,
+                'content'=>$this->renderAjax('update', [
+                    'model' => $model,
+                ]),
+                'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
+            ];         
+        }else if($model->load($request->post()) && $model->save()){
+            $id=$this->GetCallingId();
+            $model = $this->findModel($id);
+
+            return [
+                'forceReload'=>'#crud-datatable-pjax',
+                'title'=> "Db #".$id,
+                'content'=>$this->renderAjax('update', [
+                    'model' => $model,
+                ]),
+                // 'content'=>$this->renderAjax('view', [
+                //     'model' => $model,
+                // ]),
+                'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                        Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
+            ];    
+        }else{
+             return [
+                'title'=> "Update Db #".$id,
+                'content'=>$this->renderAjax('update', [
+                    'model' => $model,
+                ]),
+                'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
+            ];        
+        }
+    }else{
+        /*
+        *   Process for non-ajax request
+        */
+        if ($model->load($request->post()) && $model->save()) {
+            $id=$this->GetCallingId();
+            return $this->redirect('index.php?r=call/calling&id='.$id);
+            //return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
+    }
 }
     /**
      * Lists all Call models.

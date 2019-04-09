@@ -37,8 +37,8 @@ class Call extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'email', 'whatsapp', 'phone', 'address','remark','call_status'], 'required'],
-            [['create_at','call_status','callback'], 'safe'],
+            [['name', 'email', 'whatsapp', 'phone', 'address','call_status'], 'required'],
+            [['create_at','call_status','callback','remark'], 'safe'],
             [['name'], 'string', 'max' => 50],
             [['email'], 'string', 'max' => 100],
             [['whatsapp', 'phone'], 'string', 'max' => 15],
