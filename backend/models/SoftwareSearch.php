@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 use backend\models\Software;
 
 /**
- * SoftwareSearch represents the model behind the search form about `backend\models\Software`.
+ * SoftwareSearchModel represents the model behind the search form about `backend\models\Software`.
  */
 class SoftwareSearch extends Software
 {
